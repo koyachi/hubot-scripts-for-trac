@@ -1,0 +1,13 @@
+{
+  "name": "hubot-scripts-for-trac",
+  "description": "hubot scripts for trac.",
+  "version": "0.0.1",
+  "repository": {
+    "url": ""
+  },
+  "dependencies": {
+    "hubot": "2.x",
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
