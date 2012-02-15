@@ -1,4 +1,4 @@
-config = require '../config/config'
+config = require '../config/trac'
 
 module.exports = (robot) ->
   robot.hear /(\#|r)(\d+)/i, (msg) ->
