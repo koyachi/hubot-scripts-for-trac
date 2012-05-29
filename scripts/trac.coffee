@@ -1,11 +1,19 @@
 config = require '../config/trac'
+jsdom = require 'jsdom'
+jqueryJs = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
+
+getTicketTitle = (url, f) ->
+  jsdom.env url, [jqueryJs], (err, window) ->
+    title = window.$('h2.summary.searchable').text().replace(/[\r|\n]+/g, '')
+    f title
 
 sendMessage = (msg, matched) ->
   parts = matched.split(/[\#|r]/i).map (part) ->
     part.replace(/\s/, '')
 
   if matched.match(/\#/)
-    msg.send config.track_ticket_url(parts[1])
+    getTicketTitle config.track_ticket_url(parts[1]), (title) ->
+      msg.send "#{config.track_ticket_url(parts[1])} #{title}"
   else
     msg.send config.track_changeset_url(parts[1])
 
